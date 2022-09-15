@@ -2,8 +2,6 @@ version: '3'
 networks:
   movies:
     driver: bridge
-#  default:
-#    driver: bridge
 services:
   webserver:
     image: nginx:alpine
@@ -55,7 +53,6 @@ services:
       SERVICE_TAGS: dev
     volumes:
       - mysql_data:/var/lib/mysql
-#      - ./docker/mysql/movies_api_db:/var/lib/mysql
     networks:
       - movies
 volumes:
