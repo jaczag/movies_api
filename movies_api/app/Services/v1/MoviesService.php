@@ -25,6 +25,7 @@ class MoviesService
         $this->movie->title = $data['title'];
         $this->movie->production_country = $data['production_country'];
         $this->movie->description = Arr::get($data, 'description');
+        $this->movie->categories()->attach($data['categories_ids']);
         $this->movie->save();
 
         return $this;
@@ -45,6 +46,11 @@ class MoviesService
     public function updateMovie(array $data): static
     {
         foreach ($data as $key => $value) {
+
+            if($key === 'categories_ids' && count($value)) {
+                $this->movie->categories()->attach($value);
+            }
+
             if (Arr::get(Movie::$editableAtrributes, $key)) {
                 $this->movie->$key = $value;
             }

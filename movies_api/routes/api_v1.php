@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\AuthController;
+use App\Http\Controllers\Api\v1\CategoriesController;
 use App\Http\Controllers\Api\v1\MovieRatesController;
 use App\Http\Controllers\Api\v1\MoviesController;
 use Illuminate\Http\Request;
@@ -32,5 +33,8 @@ Route::apiResource('movies', MoviesController::class)
 
 Route::middleware('auth:sanctum')
     ->group(function () {
-        Route::apiResource('movies.rates', MovieRatesController::class)->except(['show', 'create', 'edit']);
+        Route::apiResource('movies.rates', MovieRatesController::class)
+            ->except(['show', 'create', 'edit']);
     });
+
+Route::get('categories', CategoriesController::class)->middleware('api')->name('categories');

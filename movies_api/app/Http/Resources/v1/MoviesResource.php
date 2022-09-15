@@ -28,6 +28,7 @@ class MoviesResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'added_by' => $this->whenLoaded('adder', UserResource::make($this->adder)),
+            'categories' => $this->whenLoaded('categories', CategoriesResource::collection($this->categories)),
             'country_of_production' => $this->production_country,
             'description' => $this->description,
             'created_at' => $this->created_at->toDateTimeString(),

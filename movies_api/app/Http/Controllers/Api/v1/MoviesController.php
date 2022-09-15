@@ -13,6 +13,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MoviesController extends Controller
 {
@@ -50,10 +51,17 @@ class MoviesController extends Controller
      */
     public function store(StoreMovieRequest $request, MoviesService $service): JsonResponse
     {
+        $data = $request->validated();
+
+        DB::beginTransaction();
+
         try {
-            $movie = $service->assignData($request->validated());
+            $movie = $service->assignData($data);
+            DB::commit();
+
             return $this->successResponse(MoviesResource::make($movie));
         } catch (Exception $e) {
+            DB::rollBack();
             reportError($e);
         }
         return $this->errorResponse();
@@ -65,7 +73,7 @@ class MoviesController extends Controller
      */
     public function show(Movie $movie): JsonResponse
     {
-        $movie->load(['adder']);
+        $movie->load(['adder', 'categories']);
         return $this->successResponse(MoviesResource::make($movie));
     }
 
