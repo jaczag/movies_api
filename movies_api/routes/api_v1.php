@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\AuthController;
+use App\Http\Controllers\Api\v1\MoviesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,11 @@ Route::middleware('api')
         Route::post('/register', 'register')->name('register');
         Route::post('/login', 'login')->name('login');
     });
+
+Route::apiResource('movies', MoviesController::class)
+    ->middleware('api')
+    ->except(['create', 'edit']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
