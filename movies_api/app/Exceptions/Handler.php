@@ -15,6 +15,7 @@ use Psr\Log\LogLevel;
 use Symfony\Component\ErrorHandler\Error\FatalError;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -77,7 +78,7 @@ class Handler extends ExceptionHandler
         if ($e instanceof ValidationException) {
             return $this->errorResponse(
                 $e->validator->errors()->toArray(),
-                ResponseAlias::HTTP_UNPROCESSABLE_ENTITY,
+                ResponseAlias::HTTP_BAD_REQUEST,
             );
         }
 
@@ -98,6 +99,13 @@ class Handler extends ExceptionHandler
             return $this->errorResponse(
                 __('messages.Not found'),
                 ResponseAlias::HTTP_NOT_FOUND
+            );
+        }
+
+        if ($e instanceof PreconditionFailedHttpException) {
+            return $this->errorResponse(
+                __('messages.Invalid or missing header parameter'),
+                ResponseAlias::HTTP_PRECONDITION_FAILED
             );
         }
 

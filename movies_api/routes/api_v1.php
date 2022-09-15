@@ -30,7 +30,6 @@ Route::apiResource('movies', MoviesController::class)
     ->middleware('api')
     ->except(['create', 'edit']);
 
-
 Route::middleware('auth:sanctum')
     ->group(function () {
         Route::apiResource('movies.rates', MovieRatesController::class)
@@ -38,3 +37,11 @@ Route::middleware('auth:sanctum')
     });
 
 Route::get('categories', CategoriesController::class)->middleware('api')->name('categories');
+
+Route::fallback(function() {
+    return response()->json([
+       'status' => 'error',
+       'message' => 'Not found',
+       'code' => 404,
+    ], 404);
+});
