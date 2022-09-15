@@ -3,14 +3,25 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\v1\movies\StoreMovieRequest;
+use App\Http\Requests\v1\movies\UpdateMovieRequest;
 use App\Http\Resources\v1\MoviesCollection;
+use App\Http\Resources\v1\MoviesResource;
 use App\Models\Movie;
+use App\Services\v1\MoviesService;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Movie::class, 'movie');
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -32,60 +43,61 @@ class MoviesController extends Controller
         return $this->successResponse(MoviesCollection::make($movies));
     }
 
-
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
+     * @param StoreMovieRequest $request
+     * @param MoviesService $service
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreMovieRequest $request, MoviesService $service): JsonResponse
     {
-        //
+        try {
+            $movie = $service->assignData($request->validated());
+            return $this->successResponse(MoviesResource::make($movie));
+        } catch (Exception $e) {
+            reportError($e);
+        }
+        return $this->errorResponse();
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Movie $movie
-     * @return \Illuminate\Http\Response
+     * @param Movie $movie
+     * @return JsonResponse
      */
-    public function show(Movie $movie)
+    public function show(Movie $movie): JsonResponse
     {
-        //
+        $movie->load(['adder']);
+        return $this->successResponse(MoviesResource::make($movie));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Movie $movie
-     * @return \Illuminate\Http\Response
+     * @param UpdateMovieRequest $request
+     * @param Movie $movie
+     * @return JsonResponse
      */
-    public function edit(Movie $movie)
+    public function update(UpdateMovieRequest $request, Movie $movie): JsonResponse
     {
-        //
+        try {
+            $_movie = (new MoviesService($movie))
+                ->updateMovie($request->validated())
+                ->getMovie();
+
+            return $this->successResponse(MoviesResource::make($_movie));
+        } catch (Exception $e) {
+            reportError($e);
+        }
+
+        return $this->errorResponse();
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Movie $movie
-     * @return \Illuminate\Http\Response
+     * @param Movie $movie
+     * @return JsonResponse
      */
-    public function update(Request $request, Movie $movie)
+    public function destroy(Movie $movie): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Movie $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Movie $movie)
-    {
-        //
+        if ($movie->delete()) {
+            return $this->successResponse();
+        }
+        return $this->errorResponse();
     }
 }

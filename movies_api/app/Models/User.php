@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email
  * @property string $password
  * @property Carbon|mixed $email_verified_at
+ * @property int $id
  */
 class User extends Authenticatable
 {

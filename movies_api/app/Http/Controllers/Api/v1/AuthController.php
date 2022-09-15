@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\auth\UserLoginRequest;
 use App\Http\Requests\v1\auth\UserRegisterRequest;
 use App\Http\Resources\v1\UserResource;
-use App\Services\Auth\v1\UserService;
+use App\Services\v1\UserService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ class AuthController extends Controller
 {
     /**
      * @param UserRegisterRequest $request
-     * @param UserService $service
+     * @param \App\Services\v1\UserService $service
      * @return JsonResponse
      */
     public function register(UserRegisterRequest $request, UserService $service): JsonResponse
