@@ -63,7 +63,7 @@ class MoviesController extends Controller
             }
 
             DB::commit();
-            return $this->successResponse(MoviesResource::make($movie));
+            return $this->successResponse(MoviesResource::make($movie, 'with_avg'));
         } catch (Exception $e) {
             DB::rollBack();
             reportError($e);
