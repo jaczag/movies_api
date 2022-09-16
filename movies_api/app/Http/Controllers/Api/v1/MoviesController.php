@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MoviesController extends Controller
 {
@@ -53,17 +54,14 @@ class MoviesController extends Controller
     {
         $data = $request->validated();
 
-        DB::beginTransaction();
-
         try {
             $movie = $service->assignData($data)->getMovie();
 
             if ($request->has('cover')) {
-                $movie->addMediaFromRequest('cover')->toMediaCollection();
+                $movie->addMediaFromRequest('cover')->toMediaCollection('covers');
             }
 
-            DB::commit();
-            return $this->successResponse(MoviesResource::make($movie, 'with_avg'));
+            return $this->successResponse(MoviesResource::make($movie));
         } catch (Exception $e) {
             DB::rollBack();
             reportError($e);

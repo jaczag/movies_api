@@ -13,6 +13,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $description
  * @property mixed $created_at
  * @property mixed $updated_at
+ * @method getFirstMedia()
  */
 class MoviesResource extends JsonResource
 {
@@ -33,10 +34,7 @@ class MoviesResource extends JsonResource
             'categories' => CategoriesResource::collection($this->whenLoaded('categories')),
             'country_of_production' => $this->production_country,
             'description' => $this->description,
-            'cover' => [
-                'data' => $this->getFirstMedia(),
-                'url' => $this->when($this->getFirstMedia(), fn() => $this->getFirstMedia()->getUrl(), null),
-            ],
+            'cover_url' => $this->when($this->getFirstMedia(), fn() => $this->getFirstMedia()->getUrl('thumb'), null),
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
         ];

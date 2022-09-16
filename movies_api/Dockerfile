@@ -48,7 +48,7 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 COPY . /var/www/movies_api
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/movies_apiq
+COPY --chown=www:www . /var/www/movies_api
 
 # Change current user to www
 USER www

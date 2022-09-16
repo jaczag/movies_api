@@ -212,4 +212,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'covers' => [
+       'height' => env('COVER_HEIGHT'),
+       'width' => env('COVER_WIDTH')
+    ],
 ];
