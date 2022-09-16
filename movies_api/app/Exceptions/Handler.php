@@ -14,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use Psr\Log\LogLevel;
 use Symfony\Component\ErrorHandler\Error\FatalError;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 use Throwable;
@@ -105,6 +106,13 @@ class Handler extends ExceptionHandler
         if ($e instanceof PreconditionFailedHttpException) {
             return $this->errorResponse(
                 __('messages.Invalid or missing header parameter'),
+                ResponseAlias::HTTP_PRECONDITION_FAILED
+            );
+        }
+
+        if ($e instanceof MethodNotAllowedHttpException) {
+            return $this->errorResponse(
+                __('messages.This method is not supported for the route'),
                 ResponseAlias::HTTP_PRECONDITION_FAILED
             );
         }

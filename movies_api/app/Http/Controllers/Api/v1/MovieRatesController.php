@@ -24,7 +24,7 @@ class MovieRatesController extends Controller
      */
     public function index(Movie $movie): JsonResponse
     {
-        return $this->successResponse(MoviesResource::collection($movie->rates()->get()));
+        return $this->successResponse(MovieRatesResource::collection($movie->rates()->get()));
     }
 
     /**
@@ -68,7 +68,7 @@ class MovieRatesController extends Controller
         ]);
 
         if($movie->rates()->where('id', $rate->id)->update($data)) {
-            return $this->successResponse(MovieRatesResource::make($rate));
+            return $this->successResponse();
         }
 
         return $this->errorResponse();

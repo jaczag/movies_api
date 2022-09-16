@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\Movie;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class MoviePolicy
 {
@@ -14,18 +13,20 @@ class MoviePolicy
     /**
      * Determine whether the user can view any models.
      *
+     * @param User $user
      * @return bool
      */
-    public function viewAny(): bool
+    public function viewAny(User $user): bool
     {
         return true;
     }
 
     /**
+     * @param User $user
      * @param Movie $movie
      * @return bool
      */
-    public function view(Movie $movie): bool
+    public function view(User $user,Movie $movie): bool
     {
         return true;
     }

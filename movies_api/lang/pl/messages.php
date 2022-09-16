@@ -7,4 +7,5 @@ return [
     'Success' => 'Sukces',
     'Something went wrong' => 'Coś poszło nie tak',
     'failed' => 'Niepoprawne dane logowania',
+    'This method is not supported for the route' => 'Ta akcja nie jest wspierana dla wskazanej ścieżki',
 ];

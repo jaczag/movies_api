@@ -15,7 +15,7 @@ class UpdateMovieRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        Auth::check();
+       return Auth::check();
     }
 
     /**

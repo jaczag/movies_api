@@ -56,9 +56,13 @@ class MoviesController extends Controller
         DB::beginTransaction();
 
         try {
-            $movie = $service->assignData($data);
-            DB::commit();
+            $movie = $service->assignData($data)->getMovie();
 
+            if ($request->has('cover')) {
+                $movie->addMediaFromRequest('cover')->toMediaCollection();
+            }
+
+            DB::commit();
             return $this->successResponse(MoviesResource::make($movie));
         } catch (Exception $e) {
             DB::rollBack();
@@ -93,7 +97,6 @@ class MoviesController extends Controller
         } catch (Exception $e) {
             reportError($e);
         }
-
         return $this->errorResponse();
     }
 

@@ -31,6 +31,7 @@ class StoreMovieRequest extends FormRequest
             'title' => ['required', 'string', 'max:100'],
             'production_country' => ['required', 'string', 'max:50'],
             'description' => ['nullable', 'string', 'max:1000'],
+            'cover' => ['nullable' , 'mimes:jpeg,png,jpg']
         ];
     }
 }

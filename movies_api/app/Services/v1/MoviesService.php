@@ -11,7 +11,7 @@ class MoviesService
     /**
      * @param Movie $movie
      */
-    public function __construct(private readonly Movie $movie = new Movie())
+    public function __construct(private Movie $movie = new Movie())
     {
     }
 
@@ -25,8 +25,8 @@ class MoviesService
         $this->movie->title = $data['title'];
         $this->movie->production_country = $data['production_country'];
         $this->movie->description = Arr::get($data, 'description');
-        $this->movie->categories()->attach($data['categories_ids']);
         $this->movie->save();
+        $this->movie->categories()->attach($data['categories_ids']);
 
         return $this;
     }
@@ -45,17 +45,11 @@ class MoviesService
      */
     public function updateMovie(array $data): static
     {
-        foreach ($data as $key => $value) {
-
-            if($key === 'categories_ids' && count($value)) {
-                $this->movie->categories()->attach($value);
-            }
-
-            if (Arr::get(Movie::$editableAtrributes, $key)) {
-                $this->movie->$key = $value;
-            }
+        if (Arr::get($data, 'categories_ids')) {
+            $this->movie->categories()->attach($data['categories_ids']);
+            Arr::forget($data, 'categories_ids');
         }
-        $this->movie->save();
+        $this->movie->update($data);
         return $this;
     }
 }

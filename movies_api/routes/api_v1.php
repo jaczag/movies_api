@@ -26,14 +26,11 @@ Route::middleware('api')
         Route::post('/login', 'login')->name('login');
     });
 
-Route::apiResource('movies', MoviesController::class)
-    ->middleware('api')
-    ->except(['create', 'edit']);
-
 Route::middleware('auth:sanctum')
     ->group(function () {
         Route::apiResource('movies.rates', MovieRatesController::class)
             ->except(['show', 'create', 'edit']);
+        Route::apiResource('movies', MoviesController::class)->except(['create', 'edit']);
     });
 
 Route::get('categories', CategoriesController::class)->middleware('api')->name('categories');

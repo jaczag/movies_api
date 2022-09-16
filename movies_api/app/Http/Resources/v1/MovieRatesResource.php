@@ -22,8 +22,8 @@ class MovieRatesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'movie' => $this->whenLoaded('movie', MoviesResource::make($this->movie)),
-            'user' => $this->whenLoaded('user', UserResource::make($this->user)),
+            'movie' =>MoviesResource::make($this->whenLoaded('movie')),
+            'user' => UserResource::make($this->whenLoaded('user')),
             'rate' => $this->rate
         ];
     }

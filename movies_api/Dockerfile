@@ -21,9 +21,10 @@ RUN docker-php-ext-install \
     pdo_mysql
 
 # configure packages
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install sockets
+RUN docker-php-ext-install exif
 
 # install additional packages from PECL
 RUN pecl install zip && docker-php-ext-enable zip \
