@@ -33,6 +33,14 @@ class Movie extends Model implements HasMedia
     ];
 
     /**
+     * @return string|null
+     */
+    public function avgRating(): null|string
+    {
+        return $this->rates()->avg('rate');
+    }
+
+    /**
      * relation to the user who added the movie
      * @return BelongsTo
      */

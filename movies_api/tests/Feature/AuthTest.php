@@ -11,6 +11,20 @@ class AuthTest extends TestCase
     use RefreshDatabase;
 
     protected User $user;
+    protected array $headers;
+    /**
+     * setup basic state
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create();
+        $this->headers = [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ];
+    }
 
     /**
      * Test user registration was successful
@@ -18,13 +32,13 @@ class AuthTest extends TestCase
      */
     public function test_success_user_registration(): void
     {
-        $response = $this->post(route('auth.register'), [
-            'first_name' => fake()->firstName,
-            'last_name' => fake()->lastName,
-            'email' => fake()->unique()->safeEmail(),
-            'password' => 'password',
-            'password_confirmation' => 'password'
-        ]);
+        $response = $this->postJson(route('auth.register'), [
+                'first_name' => fake()->firstName,
+                'last_name' => fake()->lastName,
+                'email' => fake()->unique()->safeEmail(),
+                'password' => 'password',
+                'password_confirmation' => 'password'
+            ], $this->headers);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -39,7 +53,7 @@ class AuthTest extends TestCase
      */
     public function test_user_login_success(): void
     {
-        $response = $this->post(route('auth.login'), [
+        $response = $this->postJson(route('auth.login'), [
             'email' => $this->user->email,
             'password' => 'password'
         ]);
@@ -71,10 +85,10 @@ class AuthTest extends TestCase
      */
     public function test_user_login_with_invalid_credentials(): void
     {
-        $response = $this->post(route('auth.login'), [
+        $response = $this->postJson(route('auth.login'), [
             'email' => $this->user->email,
-            'password' => fake()->password
-        ]);
+            'password' => 'justtesting'
+        ], $this->headers);
 
         $response->assertStatus(401);
     }
@@ -85,21 +99,11 @@ class AuthTest extends TestCase
      */
     public function test_not_registered_user_login(): void
     {
-        $response = $this->post(route('auth.login'), [
+        $response = $this->postJson(route('auth.login'), [
             'email' => fake()->email,
             'password' => fake()->password
-        ]);
+        ], $this->headers);
 
         $response->assertStatus(401);
-    }
-
-    /**
-     * setup basic state
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->user = User::factory()->create();
     }
 }
