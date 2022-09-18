@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\movies\StoreMovieRequest;
 use App\Http\Requests\v1\movies\UpdateMovieRequest;
+use App\Http\Resources\v1\MovieResource;
 use App\Http\Resources\v1\MoviesCollection;
-use App\Http\Resources\v1\MoviesResource;
 use App\Models\Movie;
 use App\Services\v1\MoviesService;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class MoviesController extends Controller
 {
@@ -30,10 +30,10 @@ class MoviesController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $search = $request->get('search');
-        $perPage = $request->get('perPage', 10);
-        $sortBy = $request->get('sortBy', 'id');
-        $orderBy = $request->get('orderBy', 'desc');
+        $search = Arr::get($request, 'search');
+        $perPage = Arr::get($request, 'perPage', '10');
+        $sortBy = Arr::get($request, 'sortBy', 'id');
+        $orderBy = Arr::get($request, 'orderBy', 'desc');
 
         $movies = Movie::query()
             ->when($search, function (Builder $query) use ($search) {
@@ -61,7 +61,7 @@ class MoviesController extends Controller
                 $movie->addMediaFromRequest('cover')->toMediaCollection('covers');
             }
 
-            return $this->successResponse(MoviesResource::make($movie));
+            return $this->successResponse(MovieResource::make($movie));
         } catch (Exception $e) {
             DB::rollBack();
             reportError($e);
@@ -76,7 +76,7 @@ class MoviesController extends Controller
     public function show(Movie $movie): JsonResponse
     {
         $movie->load(['adder', 'categories']);
-        return $this->successResponse(MoviesResource::make($movie));
+        return $this->successResponse(MovieResource::make($movie));
     }
 
     /**
@@ -91,7 +91,7 @@ class MoviesController extends Controller
                 ->updateMovie($request->validated())
                 ->getMovie();
 
-            return $this->successResponse(MoviesResource::make($_movie));
+            return $this->successResponse(MovieResource::make($_movie));
         } catch (Exception $e) {
             reportError($e);
         }

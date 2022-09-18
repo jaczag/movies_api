@@ -2,20 +2,23 @@
 
 namespace App\Http\Resources\v1;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property mixed $adder
- * @property mixed $id
- * @property mixed $title
- * @property mixed $production_country
- * @property mixed $description
- * @property mixed $created_at
- * @property mixed $updated_at
+ * @mixin User $adder
+ * @property integer $id
+ * @property string $title
+ * @property string $production_country
+ * @property string $description
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @method getFirstMedia()
+ * @method avgRating()
  */
-class MoviesResource extends JsonResource
+class MovieResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,13 +28,12 @@ class MoviesResource extends JsonResource
      */
     public function toArray($request): array
     {
-
         return [
             'id' => $this->id,
             'title' => $this->title,
             'avg_rating' => $this->avgRating(),
             'added_by' => UserResource::make($this->whenLoaded('adder')),
-            'categories' => CategoriesResource::collection($this->whenLoaded('categories')),
+            'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'country_of_production' => $this->production_country,
             'description' => $this->description,
             'cover_url' => $this->when($this->getFirstMedia(), fn() => $this->getFirstMedia()->getUrl('thumb'), null),

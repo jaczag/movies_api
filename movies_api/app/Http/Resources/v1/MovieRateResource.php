@@ -2,19 +2,20 @@
 
 namespace App\Http\Resources\v1;
 
+use App\Models\Movie;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property mixed $user
- * @property mixed $id
- * @property mixed $movie
+ * @property integer $id
+ * @property integer $rate
+ * @mixin User
+ * @mixin Movie
  */
-class MovieRatesResource extends JsonResource
+class MovieRateResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
-     *
      * @param Request $request
      * @return array
      */
@@ -22,7 +23,7 @@ class MovieRatesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'movie' =>MoviesResource::make($this->whenLoaded('movie')),
+            'movie' => MovieResource::make($this->whenLoaded('movie')),
             'user' => UserResource::make($this->whenLoaded('user')),
             'rate' => $this->rate
         ];

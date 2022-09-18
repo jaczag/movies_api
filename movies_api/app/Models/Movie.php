@@ -19,6 +19,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $title
  * @property string|null $description
  * @property string $production_country
+ * @property mixed $rates
  */
 class Movie extends Model implements HasMedia
 {

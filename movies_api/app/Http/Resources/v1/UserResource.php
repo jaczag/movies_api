@@ -3,15 +3,16 @@
 namespace App\Http\Resources\v1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 
 /**
- * @property mixed $id
- * @property mixed $first_name
- * @property mixed $email_verified_at
- * @property mixed $email
- * @property mixed $last_name
- * @property mixed $created_at
- * @property mixed $updated_at
+ * @property integer $id
+ * @property string $first_name
+ * @property Carbon $email_verified_at
+ * @property string $email
+ * @property string $last_name
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class UserResource extends JsonResource
 {

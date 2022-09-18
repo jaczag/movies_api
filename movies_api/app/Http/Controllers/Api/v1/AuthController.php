@@ -16,7 +16,7 @@ class AuthController extends Controller
 {
     /**
      * @param UserRegisterRequest $request
-     * @param \App\Services\v1\UserService $service
+     * @param UserService $service
      * @return JsonResponse
      */
     public function register(UserRegisterRequest $request, UserService $service): JsonResponse
