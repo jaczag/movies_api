@@ -35,4 +35,11 @@ Uruchomienie komendy <code>docker-compose up -d</code>
 
 ### Dokumentacja:
 
-- 
+- api_url/docs  
+- generowanie dokumentacji <code>php artisan scribe:generate</code>
+    
+### W projeckie wykorzystano m.in:
+- laravel/sanctum  
+- spatie/laravel-translatable  
+- spatie/laravel-medialibrary 
+- knuckleswtf/scribe
