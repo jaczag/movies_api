@@ -1,0 +1,592 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/auth/register:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'Must contain only letters. Must not be greater than 20 characters.'
+                  example: rdppnnqh
+                last_name:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: xbupyarhgscmdelxukranurypoglbdcvgdpvkwzoejuelggu
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 50 characters.'
+                  example: grtqbfyvcgowalewwgthaburjhfblssscgcw
+                password:
+                  type: string
+                  description: 'Must be at least 7 characters. Must not be greater than 20 characters.'
+                  example: fxppdftzutiedyd
+                password_confirmation:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: atque
+              required:
+                - first_name
+                - last_name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/v1/auth/login:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: ''
+                  example: dolores
+                password:
+                  type: string
+                  description: ''
+                  example: ut
+              required:
+                - email
+                - password
+      security: []
+  '/api/v1/movies/{movie_id}/rates':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: Unauthenticated.
+                  code: 401
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: Unauthenticated.
+                  code:
+                    type: integer
+                    example: 401
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rate:
+                  type: integer
+                  description: 'Must be between 1 and 10.'
+                  example: 1
+              required:
+                - rate
+      security: []
+    parameters:
+      -
+        in: path
+        name: movie_id
+        description: 'The ID of the movie.'
+        example: 9
+        required: true
+        schema:
+          type: integer
+  '/api/v1/movies/{movie_id}/rates/{id}':
+    put:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rate:
+                  type: integer
+                  description: 'Must be between 1 and 10.'
+                  example: 1
+              required:
+                - rate
+      security: []
+    delete:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: movie_id
+        description: 'The ID of the movie.'
+        example: 9
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: id
+        description: 'The ID of the rate.'
+        example: 18
+        required: true
+        schema:
+          type: integer
+  /api/v1/movies:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: Unauthenticated.
+                  code: 401
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: Unauthenticated.
+                  code:
+                    type: integer
+                    example: 401
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                categories_ids:
+                  type: array
+                  description: ''
+                  example:
+                    - 20
+                  items:
+                    type: integer
+                title:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: yzdqtxyadkoedqkhxwnbxetayccgrhvkwsaimbqidy
+                production_country:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: ettkpxhomiurfdjysptomoqgptpcsph
+                description:
+                  type: string
+                  description: 'Must not be greater than 1000 characters.'
+                  example: tzeqildtyjjwdefykgsekrruortienqgsuwgfiqxinyvmwycdoxpandqyujoiemgbbbqwcfvmkzuiyvgbifkhazhcesnoybxiirocrvuyvpdfkkpoggmnbwjxlaexwlftjdddkmvrgfiywesxmvedcvxkpcfyhpadqvlyoxxihmpookeljvfonxnkefwhheudcsimowqunfjzmxdpjrbnyyazurddpxidtrhnzqsirjkzlbbfxbalfmjlnkeolzhdtosduyjxnmezegtymjkcwkeossapkuydknlbxszzvqaenhpgvnzhwvholygugqhorrujyvsfdrssopomtsfivwdoorokrgliscmjabzhijnsggwsuqbltnwocoqoflvogkqpdkdnbeakxipvzdagqlavffaphwuerjhikqkypemvfjxcdjlsqcatyhryykdulgdmsjlzhcrkoabypsnzsjobdpoetpdwzpdrhoiyzlliqpkbyncirawtziyjbwjjjxaheecjkkiiwdwixylufpjhxgsdxyqqpaizlnfmjzzydkntyzmpmghdeiwedqtombwbytolzdcuzfwuexauzzsjmpkmznjczdosduoomzlpjlterbcdenuisfxinezjntdhdpaycicnzqwldhscjpivaifnpckfacxyreneowfqglzswypkuqbkhbraozebxvdnvpsylnellpgwftyrswvtthbtnykeeeujcrpetpwaiidqngglsdyujdppyvchysmiiegicpiecehtncrdptixwhujwdrarglmkedkaqhmbksedlcqtpzbevrovmnvmlkxzgzlrbpqqoawrrrgrkfzxbenacfkkljlyrtcfvayugfjfuvxaeqexkquzkfrl
+                cover:
+                  type: string
+                  format: binary
+                  description: 'Must be a file.'
+              required:
+                - categories_ids
+                - title
+                - production_country
+      security: []
+  '/api/v1/movies/{id}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: Unauthenticated.
+                  code: 401
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: Unauthenticated.
+                  code:
+                    type: integer
+                    example: 401
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                categories_ids:
+                  type: array
+                  description: ''
+                  example:
+                    - 12
+                  items:
+                    type: integer
+                title:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: nchzsxavwmqcjwmvdvxomessbkodqoqpdskpiknbkxqwgjzmnhvbllafotscpgofxxqwfgtxyijpshxtlenyzrwep
+                production_country:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: zoskjnuwxqvyafzwxxgfxjhmok
+                description:
+                  type: string
+                  description: 'Must not be greater than 1000 characters.'
+                  example: nzdrczugbuprarfufxrjvunwtkejftqutcgocooszdoetrbxhyodyqyhywknqgqrpwypziwqfduv
+      security: []
+    delete:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the movie.'
+        example: 19
+        required: true
+        schema:
+          type: integer
+  /api/v1/categories:
+    get:
+      summary: 'Handle the incoming request.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: ok
+                  data: []
+                  message: Success
+                  code: 200
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    example: []
+                  message:
+                    type: string
+                    example: Success
+                  code:
+                    type: integer
+                    example: 200
+      tags:
+        - Endpoints
+      security: []
+  '/api/v1/{fallbackPlaceholder}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'messages.Not found'
+                  code: 404
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'messages.Not found'
+                  code:
+                    type: integer
+                    example: 404
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: fallbackPlaceholder
+        description: ''
+        example: ''
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: Endpoints
+    description: ''

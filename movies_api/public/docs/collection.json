@@ -1,0 +1,624 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "b435a601-85ad-4521-aeaf-da7ad4a23cbd",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "api\/v1\/auth\/register",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/auth\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/auth\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"first_name\":\"rdppnnqh\",\"last_name\":\"xbupyarhgscmdelxukranurypoglbdcvgdpvkwzoejuelggu\",\"email\":\"grtqbfyvcgowalewwgthaburjhfblssscgcw\",\"password\":\"fxppdftzutiedyd\",\"password_confirmation\":\"atque\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/auth\/login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/auth\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/auth\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"dolores\",\"password\":\"ut\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/movies\/{movie_id}\/rates",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:movie_id\/rates",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:movie_id\/rates",
+                            "variable": [
+                                {
+                                    "id": "movie_id",
+                                    "key": "movie_id",
+                                    "value": "9",
+                                    "description": "The ID of the movie."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"status\":\"error\",\"message\":\"Unauthenticated.\",\"code\":401}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/movies\/{movie_id}\/rates",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:movie_id\/rates",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:movie_id\/rates",
+                            "variable": [
+                                {
+                                    "id": "movie_id",
+                                    "key": "movie_id",
+                                    "value": "13",
+                                    "description": "The ID of the movie."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"rate\":1}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/movies\/{movie_id}\/rates\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:movie_id\/rates\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:movie_id\/rates\/:id",
+                            "variable": [
+                                {
+                                    "id": "movie_id",
+                                    "key": "movie_id",
+                                    "value": "9",
+                                    "description": "The ID of the movie."
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "The ID of the rate."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"rate\":1}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/movies\/{movie_id}\/rates\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:movie_id\/rates\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:movie_id\/rates\/:id",
+                            "variable": [
+                                {
+                                    "id": "movie_id",
+                                    "key": "movie_id",
+                                    "value": "8",
+                                    "description": "The ID of the movie."
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "The ID of the rate."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/movies",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"status\":\"error\",\"message\":\"Unauthenticated.\",\"code\":401}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/movies",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "categories_ids[0]",
+                                    "value": 20,
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "yzdqtxyadkoedqkhxwnbxetayccgrhvkwsaimbqidy",
+                                    "type": "text",
+                                    "description": "Must not be greater than 100 characters."
+                                },
+                                {
+                                    "key": "production_country",
+                                    "value": "ettkpxhomiurfdjysptomoqgptpcsph",
+                                    "type": "text",
+                                    "description": "Must not be greater than 50 characters."
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "tzeqildtyjjwdefykgsekrruortienqgsuwgfiqxinyvmwycdoxpandqyujoiemgbbbqwcfvmkzuiyvgbifkhazhcesnoybxiirocrvuyvpdfkkpoggmnbwjxlaexwlftjdddkmvrgfiywesxmvedcvxkpcfyhpadqvlyoxxihmpookeljvfonxnkefwhheudcsimowqunfjzmxdpjrbnyyazurddpxidtrhnzqsirjkzlbbfxbalfmjlnkeolzhdtosduyjxnmezegtymjkcwkeossapkuydknlbxszzvqaenhpgvnzhwvholygugqhorrujyvsfdrssopomtsfivwdoorokrgliscmjabzhijnsggwsuqbltnwocoqoflvogkqpdkdnbeakxipvzdagqlavffaphwuerjhikqkypemvfjxcdjlsqcatyhryykdulgdmsjlzhcrkoabypsnzsjobdpoetpdwzpdrhoiyzlliqpkbyncirawtziyjbwjjjxaheecjkkiiwdwixylufpjhxgsdxyqqpaizlnfmjzzydkntyzmpmghdeiwedqtombwbytolzdcuzfwuexauzzsjmpkmznjczdosduoomzlpjlterbcdenuisfxinezjntdhdpaycicnzqwldhscjpivaifnpckfacxyreneowfqglzswypkuqbkhbraozebxvdnvpsylnellpgwftyrswvtthbtnykeeeujcrpetpwaiidqngglsdyujdppyvchysmiiegicpiecehtncrdptixwhujwdrarglmkedkaqhmbksedlcqtpzbevrovmnvmlkxzgzlrbpqqoawrrrgrkfzxbenacfkkljlyrtcfvayugfjfuvxaeqexkquzkfrl",
+                                    "type": "text",
+                                    "description": "Must not be greater than 1000 characters."
+                                },
+                                {
+                                    "key": "cover",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/movies\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "19",
+                                    "description": "The ID of the movie."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"status\":\"error\",\"message\":\"Unauthenticated.\",\"code\":401}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/movies\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "The ID of the movie."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"categories_ids\":[12],\"title\":\"nchzsxavwmqcjwmvdvxomessbkodqoqpdskpiknbkxqwgjzmnhvbllafotscpgofxxqwfgtxyijpshxtlenyzrwep\",\"production_country\":\"zoskjnuwxqvyafzwxxgfxjhmok\",\"description\":\"nzdrczugbuprarfufxrjvunwtkejftqutcgocooszdoetrbxhyodyqyhywknqgqrpwypziwqfduv\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api\/v1\/movies\/{id}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/movies\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/movies\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "18",
+                                    "description": "The ID of the movie."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Handle the incoming request.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/categories"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "59"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":\"ok\",\"data\":[],\"message\":\"Success\",\"code\":200}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "api\/v1\/{fallbackPlaceholder}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/:fallbackPlaceholder",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/:fallbackPlaceholder",
+                            "variable": [
+                                {
+                                    "id": "fallbackPlaceholder",
+                                    "key": "fallbackPlaceholder",
+                                    "value": "",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 404,
+                            "body": "{\"status\":\"error\",\"message\":\"messages.Not found\",\"code\":404}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
