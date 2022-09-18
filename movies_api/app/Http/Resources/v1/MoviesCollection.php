@@ -15,7 +15,7 @@ class MoviesCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
-            'data' => MoviesResource::collection($this->collection),
+            'data' => MovieResource::collection($this->collection),
             'pagination' => new PaginationResource($this)
         ];
     }

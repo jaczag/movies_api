@@ -16,22 +16,9 @@ class MoviesTest extends TestCase
     protected Category $category;
     protected Movie $movie;
 
-    /**
-     * setup basic state
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->user = User::factory()->create();
-        $this->category = Category::factory()->create();
-        $this->Movie = Movie::factory()->create();
-    }
-
     public function test_user_can_fetch_list_of_movies()
     {
         $response = $this->actingAs($this->user)->getJson(route('movies.index'));
-
         $response->assertStatus(200);
     }
 
@@ -46,12 +33,18 @@ class MoviesTest extends TestCase
     {
         $response = $this->actingAs($this->user)->postJson(route('movies.store'), [
             'categories_ids' => [$this->category->id],
-            'title' => fake()->name,
-            'production_country' => fake()->country,
-            'description' => fake()->text,
+            'title' => 'Test Title',
+            'production_country' => 'China',
+            'description' => 'some description',
         ]);
 
         $response->assertStatus(200);
+
+        $this->assertDatabaseHas('movies', [
+            'title' => 'Test Title',
+            'production_country' => 'China',
+            'description' => 'some description',
+        ]);
     }
 
     public function test_unauthenticated_user_cannot_store_movie(): void
@@ -72,5 +65,27 @@ class MoviesTest extends TestCase
             ->postJson(route('movies.show', ['movie' => $this->movie->id]));
 
         $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                    "status" => 200,
+                    "data" => [
+                        'id' => $this->movie->id
+                    ],
+                    "message" => "Success",
+                    "code" => 200,
+                ]
+            );
+    }
+
+    /**
+     * setup basic state
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create();
+        $this->category = Category::factory()->create();
+        $this->Movie = Movie::factory()->create();
     }
 }

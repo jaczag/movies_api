@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Image\Exceptions\InvalidManipulation;
-use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -20,6 +19,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $description
  * @property string $production_country
  * @property mixed $rates
+ * @property mixed $id
  */
 class Movie extends Model implements HasMedia
 {
@@ -54,20 +54,20 @@ class Movie extends Model implements HasMedia
     }
 
     /**
+     * @return HasMany
+     */
+    public function rates(): HasMany
+    {
+        return $this->hasMany(MovieRate::class);
+    }
+
+    /**
      * relation to the user who added the movie
      * @return BelongsTo
      */
     public function adder(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function rates(): HasMany
-    {
-        return $this->hasMany(MovieRate::class);
     }
 
     /**
